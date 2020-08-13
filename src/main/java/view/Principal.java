@@ -15,7 +15,6 @@ public class Principal {
 		Pessoa joao = new Pessoa("João", "Silva Sauro", 'M', 1.9, dataNascimento);
 		
 		JOptionPane.showMessageDialog(null, "Idade do Joao: " + joao.getIdade());
-
 	}
 
 }
