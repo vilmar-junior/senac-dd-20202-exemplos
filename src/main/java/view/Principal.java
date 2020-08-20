@@ -1,20 +1,22 @@
 package view;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import model.vo.Pessoa;
-
+import model.vo.*;
 public class Principal {
 
 	public static void main(String[] args) {
+		List<Telefone> telefones = new ArrayList<Telefone>();
+		Telefone telefone1 = new Telefone(2, "048", "32323232", false, "131323");
+		telefones.add(telefone1);
 		
-		LocalDate dataNascimento = LocalDate.of(2000, 8, 12);
+		Cliente joao = new Cliente(10, "Jo√£o", "01122233311", new Endereco(), telefones); 
+		telefone1.setTitularConta(joao);
 		
-		Pessoa joao = new Pessoa("Jo„o", "Silva Sauro", 'M', 1.9, dataNascimento);
-		
-		JOptionPane.showMessageDialog(null, "Idade do Joao: " + joao.getIdade());
+		System.out.println("********** Dados do cliente **********\n" + joao.toString());
+		System.out.println("********** Dados dos telefones **********\n" + telefones.toString());
+
 	}
 
 }
