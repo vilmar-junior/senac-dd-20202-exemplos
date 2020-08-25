@@ -1,4 +1,6 @@
-CREATE TABLE public."ENDERECO"
+CREATE SCHEMA IF NOT EXISTS EXEMPLOS;
+
+CREATE TABLE EXEMPLOS."ENDERECO"
 (
     "ID" numeric NOT NULL,
     "RUA" character varying(400) NOT NULL,
@@ -8,7 +10,7 @@ CREATE TABLE public."ENDERECO"
     PRIMARY KEY ("ID")
 );
 
-CREATE TABLE public."CLIENTE"
+CREATE TABLE EXEMPLOS."CLIENTE"
 (
     "ID" numeric NOT NULL,
     "NOME" character varying(200) NOT NULL,
@@ -22,7 +24,7 @@ CREATE TABLE public."CLIENTE"
         ON DELETE NO ACTION
 );
 
-CREATE TABLE public."TELEFONE"
+CREATE TABLE EXEMPLOS."TELEFONE"
 (
     "ID" numeric NOT NULL,
     "DDD" character varying(3) NOT NULL,

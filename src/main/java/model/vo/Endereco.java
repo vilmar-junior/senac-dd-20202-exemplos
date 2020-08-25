@@ -5,7 +5,6 @@ public class Endereco {
 	//Atributos
 	private int id;
 	private String rua;
-	private String cep;
 	private String numero;
 	private String estado;
 	private String cidade;
@@ -15,11 +14,10 @@ public class Endereco {
 		
 	}
 	
-	public Endereco(int id, String rua, String cep, String numero, String estado, String cidade) {
+	public Endereco(int id, String rua, String numero, String estado, String cidade) {
 		super();
 		this.id = id;
 		this.rua = rua;
-		this.cep = cep;
 		this.numero = numero;
 		this.estado = estado;
 		this.cidade = cidade;
@@ -27,7 +25,7 @@ public class Endereco {
 	
 	@Override
 	public String toString() {
-		return "Endereco [id=" + id + ", rua=" + rua + ", cep=" + cep + ", numero=" + numero + ", estado=" + estado
+		return "Endereco [id=" + id + ", rua=" + rua + ", numero=" + numero + ", estado=" + estado
 				+ ", cidade=" + cidade + "]";
 	}
 
@@ -46,14 +44,6 @@ public class Endereco {
 
 	public void setRua(String rua) {
 		this.rua = rua;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 
 	public String getNumero() {
