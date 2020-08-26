@@ -48,7 +48,7 @@ public class EnderecoDAO {
 			
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir endereço.\nCausa: " + e.getMessage());
-		}finally {
+		} finally {
 			Banco.closeStatement(query);
 			Banco.closeConnection(conexao);
 		}
