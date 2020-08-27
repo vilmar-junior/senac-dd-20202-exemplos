@@ -12,7 +12,7 @@ public class Principal {
 		telefones.add(telefone1);
 		
 		Cliente joao = new Cliente(10, "João", "01122233311", new Endereco(), telefones); 
-		telefone1.setTitularConta(joao);
+		telefone1.setIdClienteTitularConta(joao.getId());
 		
 		System.out.println("********** Dados do cliente **********\n" + joao.toString());
 		System.out.println("********** Dados dos telefones **********\n" + telefones.toString());

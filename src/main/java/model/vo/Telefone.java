@@ -5,7 +5,7 @@ public class Telefone {
 	private int id;
 	private String ddd;
 	private String numero;
-	private Cliente titularConta; 
+	private int idClienteTitularConta; 
 	private boolean movel;
 	private String imei;
 	
@@ -24,7 +24,7 @@ public class Telefone {
 	
 	@Override
 	public String toString() {
-		return "Telefone [id=" + id + ", ddd=" + ddd + ", numero=" + numero + ", titularConta=" + titularConta
+		return "Telefone [id=" + id + ", ddd=" + ddd + ", numero=" + numero + ", idClienteTitularConta=" + idClienteTitularConta
 				+ ", movel=" + movel + ", imei=" + imei + "]";
 	}
 
@@ -58,10 +58,12 @@ public class Telefone {
 	public void setImei(String imei) {
 		this.imei = imei;
 	}
-	public void setTitularConta(Cliente titular) {
-		this.titularConta = titular;
+
+	public int getIdClienteTitularConta() {
+		return idClienteTitularConta;
 	}
-	public Cliente getTitularConta() {
-		return this.titularConta;
+
+	public void setIdClienteTitularConta(int idClienteTitularConta) {
+		this.idClienteTitularConta = idClienteTitularConta;
 	}
 }

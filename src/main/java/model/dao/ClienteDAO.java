@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.vo.Cliente;
 import model.vo.Endereco;
+import model.vo.Telefone;
 
 /**
  * 
@@ -158,6 +159,14 @@ public class ClienteDAO {
 		return clientesBuscados;
 	}
 
+	
+	
+	/**
+	 * Converte uma tupla do banco para um objeto do tipo Cliente
+	 * @param conjuntoResultante a tupla consultada no banco
+	 * @return um cliente com os atributos preenchidos
+	 * @throws SQLException
+	 */
 	private Cliente construirClienteDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 		Cliente clienteBuscado = new Cliente();
 		clienteBuscado.setId(conjuntoResultante.getInt("id"));
@@ -170,10 +179,34 @@ public class ClienteDAO {
 		Endereco enderecoDoCliente = enderecoDAO.pesquisarPorId(idEndereco);
 		clienteBuscado.setEndereco(enderecoDoCliente);
 		
-		//TODO como preencher endereco e telefones?
+		//Consulta os telefones do cliente
+		TelefoneDAO telefoneDAO = new TelefoneDAO();
+		List<Telefone> telefones = telefoneDAO.pesquisarTelefonesPorIdCliente(clienteBuscado.getId());
+		clienteBuscado.setTelefones(telefones);
 		
 		return clienteBuscado;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private Endereco verificarEnderecoDoCliente(Cliente cliente) {
 		Endereco enderecoDoCliente = cliente.getEndereco();
