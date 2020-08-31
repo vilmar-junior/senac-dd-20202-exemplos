@@ -15,7 +15,7 @@ import model.vo.Endereco;
  * @author Vilmar C. Pereira Jr
  *
  */
-public class EnderecoDAO {
+public class EnderecoDAO implements BaseDAO<Endereco>{
 	
 	/**
 	 * Insere um novo registro na tabela ENDERECO
@@ -113,7 +113,7 @@ public class EnderecoDAO {
 			ResultSet conjuntoResultante = consulta.executeQuery();
 			
 			if(conjuntoResultante.next()) {
-				enderecoBuscado = construirEnderecoDoResultSet(conjuntoResultante);
+				enderecoBuscado = construirDoResultSet(conjuntoResultante);
 			}
 		} catch (SQLException e) {
 			System.out.println("Erro ao consultar endereço por Id (id: " + id + ") .\nCausa: " + e.getMessage());
@@ -131,7 +131,7 @@ public class EnderecoDAO {
 		try {
 			ResultSet conjuntoResultante = consulta.executeQuery();
 			while(conjuntoResultante.next()) {
-				Endereco enderecoBuscado = construirEnderecoDoResultSet(conjuntoResultante);
+				Endereco enderecoBuscado = construirDoResultSet(conjuntoResultante);
 				enderecosBuscados.add(enderecoBuscado);
 			}
 		} catch (SQLException e) {
@@ -144,7 +144,7 @@ public class EnderecoDAO {
 		return enderecosBuscados;
 	}
 
-	private Endereco construirEnderecoDoResultSet(ResultSet conjuntoResultante) throws SQLException {
+	public Endereco construirDoResultSet(ResultSet conjuntoResultante) throws SQLException {
 		Endereco enderecoBuscado = new Endereco();
 		enderecoBuscado.setId(conjuntoResultante.getInt("id"));
 		enderecoBuscado.setRua(conjuntoResultante.getString("rua"));
