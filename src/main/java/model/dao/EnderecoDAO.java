@@ -41,7 +41,7 @@ public class EnderecoDAO {
 			
 			if(codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO) {
 				ResultSet resultado = query.getGeneratedKeys();
-				int chaveGerada = resultado.getInt("ID");
+				int chaveGerada = resultado.getInt(1);
 				
 				novoEndereco.setId(chaveGerada);
 			}
