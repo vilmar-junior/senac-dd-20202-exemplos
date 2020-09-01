@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface BaseDAO<T> {
-
+	
 	public T inserir(T novoObjeto);
 	
 	public boolean alterar(T objetoAlterado);
