@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,9 +159,33 @@ public class ClienteDAO {
 		
 		return clientesBuscados;
 	}
+	
+	/**
+	 * Verifica se um CPF já foi usado por um cliente cadastrado.
+	 * 
+	 * @param cpf o CPF a ser verificado
+	 * @return boolean true caso já usado, false caso contrário.
+	 */
+	public boolean cpfJaCadastrado(String cpf) {
+		boolean jaCadastrado = false;
 
-	
-	
+		Connection conexao = Banco.getConnection();
+		String sql = "SELECT count(id) FROM CLIENTE WHERE CPF = " + cpf;
+		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
+		
+		try {
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			jaCadastrado = conjuntoResultante.next();
+		} catch (SQLException e) {
+			System.out.println("Erro ao verificar se CPF (" + cpf + ") já foi usado .\nCausa: " + e.getMessage());
+		}finally {
+			Banco.closeStatement(consulta);
+			Banco.closeConnection(conexao);
+		}
+		
+		return jaCadastrado;
+	}
+
 	/**
 	 * Converte uma tupla do banco para um objeto do tipo Cliente
 	 * @param conjuntoResultante a tupla consultada no banco
@@ -186,27 +211,6 @@ public class ClienteDAO {
 		
 		return clienteBuscado;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	private Endereco verificarEnderecoDoCliente(Cliente cliente) {
 		Endereco enderecoDoCliente = cliente.getEndereco();
