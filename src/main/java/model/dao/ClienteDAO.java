@@ -130,6 +130,26 @@ public class ClienteDAO {
 		return clienteBuscado;
 	}
 	
+	public Cliente pesquisarPorCpf(String cpf) {
+		String sql = " SELECT * FROM CLIENTE WHERE CPF=? ";
+		Cliente clienteBuscado = null;
+		
+		//Exemplo usando try-with-resources (similar ao bloco finally)
+		try (Connection conexao = Banco.getConnection();
+			PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+			consulta.setString(1, cpf);
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			
+			if(conjuntoResultante.next()) {
+				clienteBuscado = construirClienteDoResultSet(conjuntoResultante);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar cliente por CPF (" + cpf + ") .\nCausa: " + e.getMessage());
+		}
+		
+		return clienteBuscado;
+	}
+	
 	public List<Cliente> pesquisarTodos() {
 		Connection conexao = Banco.getConnection();
 		String sql = " SELECT * FROM CLIENTE ";
@@ -161,23 +181,35 @@ public class ClienteDAO {
 	}
 	
 	/**
-	 * Verifica se um CPF já foi usado por um cliente cadastrado.
+	 * Verifica se um CPF já foi usado por um cliente cadastrado
+	 * DIFERENTE do cliente atual.
 	 * 
-	 * @param cpf o CPF a ser verificado
-	 * @return boolean true caso já usado, false caso contrário.
+	 * @param umCliente o cliente a ter o CPF verificado
+	 * @return boolean true caso já usado por outro cliente, false caso contrário.
 	 */
-	public boolean cpfJaCadastrado(String cpf) {
+	public boolean cpfJaCadastrado(Cliente umCliente) {
 		boolean jaCadastrado = false;
 
 		Connection conexao = Banco.getConnection();
-		String sql = "SELECT count(id) FROM CLIENTE WHERE CPF = " + cpf;
+		String sql = "SELECT count(id) FROM CLIENTE WHERE CPF = ?";
+		
+		if(umCliente.getId() > 0) {
+			sql += " AND ID <> ? ";
+		}
+		
 		PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);
 		
 		try {
+			consulta.setString(1, umCliente.getCpf());
+			
+			if(umCliente.getId() > 0) {
+				consulta.setInt(2, umCliente.getId());
+			}
+			
 			ResultSet conjuntoResultante = consulta.executeQuery();
 			jaCadastrado = conjuntoResultante.next();
 		} catch (SQLException e) {
-			System.out.println("Erro ao verificar se CPF (" + cpf + ") já foi usado .\nCausa: " + e.getMessage());
+			System.out.println("Erro ao verificar se CPF (" + umCliente.getCpf() + ") já foi usado .\nCausa: " + e.getMessage());
 		}finally {
 			Banco.closeStatement(consulta);
 			Banco.closeConnection(conexao);

@@ -154,4 +154,24 @@ public class EnderecoDAO implements BaseDAO<Endereco>{
 		
 		return enderecoBuscado;
 	}
+
+	public Endereco pesquisarPorCEP(String cep) {
+		String sql = "SELECT * FROM ENDERECO WHERE CEP=?";
+		Endereco enderecoBuscado = null;
+		
+		//Exemplo usando try-with-resources (similar ao bloco finally)
+		try (Connection conexao = Banco.getConnection();
+			 PreparedStatement consulta = Banco.getPreparedStatement(conexao, sql);) {
+			consulta.setString(1, cep);
+			ResultSet conjuntoResultante = consulta.executeQuery();
+			
+			if(conjuntoResultante.next()) {
+				enderecoBuscado = construirDoResultSet(conjuntoResultante);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar endereço por CEP (" + cep + ") .\nCausa: " + e.getMessage());
+		}
+		
+		return enderecoBuscado;
+	}
 }
