@@ -25,8 +25,7 @@ public class Endereco {
 	
 	@Override
 	public String toString() {
-		return "Endereco [id=" + id + ", rua=" + rua + ", numero=" + numero + ", estado=" + estado
-				+ ", cidade=" + cidade + "]";
+		return rua + ", n." + numero + ", " + cidade + " - " + estado;
 	}
 
 	//Getters e setters

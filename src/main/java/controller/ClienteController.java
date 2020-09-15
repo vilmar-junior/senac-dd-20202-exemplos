@@ -10,6 +10,11 @@ public class ClienteController {
 
 	private ClienteBO bo = new ClienteBO();
 	
+	/**
+	 * Salva um novo cliente
+	 * @param novoCliente o cliente a ser criado
+	 * @return mensagem informando sucesso ou erro
+	 */
 	public String salvar(Cliente novoCliente) {
 		String mensagem = "";
 		
