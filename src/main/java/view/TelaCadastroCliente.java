@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import controller.ClienteController;
 import model.vo.Cliente;
 import model.vo.Endereco;
+import javax.swing.JCheckBox;
 
 public class TelaCadastroCliente extends JFrame {
 
@@ -26,6 +27,9 @@ public class TelaCadastroCliente extends JFrame {
 	private JTextField txtNome;
 	private JTextField txtCPF;
 	private JComboBox cbEndereco;
+	private JCheckBox chkAdimplente;
+	private JLabel lblBomPagadorNao;
+	private JLabel lblBomPagadorSim;
 
 	/**
 	 * Launch the application.
@@ -49,7 +53,7 @@ public class TelaCadastroCliente extends JFrame {
 	public TelaCadastroCliente() {
 		setTitle("Cadastro de cliente");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 460, 240);
+		setBounds(100, 100, 460, 311);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -94,7 +98,7 @@ public class TelaCadastroCliente extends JFrame {
 		});
 		btnSalvar.setFont(new Font("Lucida Grande", Font.BOLD, 14));
 		btnSalvar.setForeground(new Color(0, 128, 128));
-		btnSalvar.setBounds(18, 166, 436, 29);
+		btnSalvar.setBounds(11, 241, 436, 29);
 		contentPane.add(btnSalvar);
 		
 		JLabel lblEndereco = new JLabel("Endereço:");
@@ -105,6 +109,36 @@ public class TelaCadastroCliente extends JFrame {
 		cbEndereco = new JComboBox(enderecos.toArray());
 		cbEndereco.setBounds(84, 119, 370, 27);
 		contentPane.add(cbEndereco);
+		
+		JLabel lblBomPagador = new JLabel("Bom pagador?");
+		lblBomPagador.setBounds(149, 213, 101, 16);
+		contentPane.add(lblBomPagador);
+		
+		lblBomPagadorSim = new JLabel("SIM");
+		lblBomPagadorSim.setVisible(false);
+		lblBomPagadorSim.setForeground(new Color(0, 128, 0));
+		lblBomPagadorSim.setBounds(252, 213, 61, 16);
+		contentPane.add(lblBomPagadorSim);
+		
+		lblBomPagadorNao = new JLabel("NÃO");
+		lblBomPagadorNao.setForeground(new Color(255, 0, 0));
+		lblBomPagadorNao.setBounds(252, 213, 61, 16);
+		contentPane.add(lblBomPagadorNao);
+		
+		chkAdimplente = new JCheckBox("Adimplente");
+		chkAdimplente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(chkAdimplente.isSelected()) {
+					lblBomPagadorSim.setVisible(true);
+					lblBomPagadorNao.setVisible(false);
+				} else {
+					lblBomPagadorSim.setVisible(false);
+					lblBomPagadorNao.setVisible(true);
+				}
+			}
+		});
+		chkAdimplente.setBounds(84, 158, 128, 23);
+		contentPane.add(chkAdimplente);
 	}
 
 	private ArrayList<Endereco> obterEnderecosMock() {
