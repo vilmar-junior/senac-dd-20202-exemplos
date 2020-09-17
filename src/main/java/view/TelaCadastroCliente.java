@@ -20,6 +20,8 @@ import controller.ClienteController;
 import model.vo.Cliente;
 import model.vo.Endereco;
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 public class TelaCadastroCliente extends JFrame {
 
@@ -30,6 +32,7 @@ public class TelaCadastroCliente extends JFrame {
 	private JCheckBox chkAdimplente;
 	private JLabel lblBomPagadorNao;
 	private JLabel lblBomPagadorSim;
+	private final ButtonGroup rgroupOpcoes = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -139,6 +142,21 @@ public class TelaCadastroCliente extends JFrame {
 		});
 		chkAdimplente.setBounds(84, 158, 128, 23);
 		contentPane.add(chkAdimplente);
+		
+		JRadioButton rdbtnSim = new JRadioButton("Sim");
+		rgroupOpcoes.add(rdbtnSim);
+		rdbtnSim.setBounds(313, 180, 141, 23);
+		contentPane.add(rdbtnSim);
+		
+		JRadioButton rdbtnNao = new JRadioButton("Não");
+		rgroupOpcoes.add(rdbtnNao);
+		rdbtnNao.setBounds(313, 206, 141, 23);
+		contentPane.add(rdbtnNao);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Talvez");
+		rgroupOpcoes.add(rdbtnNewRadioButton);
+		rdbtnNewRadioButton.setBounds(313, 158, 141, 23);
+		contentPane.add(rdbtnNewRadioButton);
 	}
 
 	private ArrayList<Endereco> obterEnderecosMock() {
