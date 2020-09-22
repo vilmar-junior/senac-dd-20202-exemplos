@@ -15,6 +15,7 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 /**
  * 
@@ -30,6 +31,7 @@ public class TelaComponentesComMascaras extends JFrame {
 	private JFormattedTextField formattedTextFieldTelefone;
 	private JFormattedTextField formattedTextFieldPlaca;
 	private JLabel lblValores;
+	private JButton btnPegarValoresEm;
 
 	/**
 	 * Launch the application.
@@ -93,14 +95,15 @@ public class TelaComponentesComMascaras extends JFrame {
 		txtValorEmReais.setBounds(270, 86, 155, 20);
 		contentPane.add(txtValorEmReais);
 		
-		JButton btnPegarValoresEm = new JButton("Pegar valores em String");
+		btnPegarValoresEm = new JButton("Pegar valores em String");
+		btnPegarValoresEm.setIcon(new ImageIcon(TelaComponentesComMascaras.class.getResource("/icons/icons8-confiança.png")));
 		btnPegarValoresEm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String placa =  formattedTextFieldPlaca.getText();
 				lblValores.setText(placa);
 			}
 		});
-		btnPegarValoresEm.setBounds(100, 126, 234, 23);
+		btnPegarValoresEm.setBounds(100, 126, 240, 50);
 		contentPane.add(btnPegarValoresEm);
 		
 		lblValores = new JLabel("");
