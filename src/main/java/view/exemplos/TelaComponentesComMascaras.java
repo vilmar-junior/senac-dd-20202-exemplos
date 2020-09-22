@@ -6,6 +6,7 @@ import java.text.ParseException;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -57,6 +58,54 @@ public class TelaComponentesComMascaras extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel lblPlaca = new JLabel("Placa:");
+		lblPlaca.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblPlaca.setBounds(10, 25, 75, 14);
+		contentPane.add(lblPlaca);
+		
+		JLabel lblTelefone = new JLabel("Telefone:");
+		lblTelefone.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTelefone.setBounds(10, 55, 75, 14);
+		contentPane.add(lblTelefone);
+
+		JLabel lblCpf = new JLabel("CPF:");
+		lblCpf.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCpf.setBounds(199, 25, 61, 14);
+		contentPane.add(lblCpf);
+
+		JLabel lblCnpj = new JLabel("CNPJ:");
+		lblCnpj.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCnpj.setBounds(199, 56, 61, 14);
+		contentPane.add(lblCnpj);
+
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblCep.setBounds(10, 86, 74, 14);
+		contentPane.add(lblCep);
+
+		JLabel lblValorEmReais = new JLabel("R$:");
+		lblValorEmReais.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblValorEmReais.setBounds(199, 83, 61, 14);
+		contentPane.add(lblValorEmReais);
+
+		JNumberFormatField txtValorEmReais = new JNumberFormatField(2);
+		txtValorEmReais.setBounds(270, 86, 155, 20);
+		contentPane.add(txtValorEmReais);
+		
+		JButton btnPegarValoresEm = new JButton("Pegar valores em String");
+		btnPegarValoresEm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String placa =  formattedTextFieldPlaca.getText();
+				lblValores.setText(placa);
+			}
+		});
+		btnPegarValoresEm.setBounds(100, 126, 234, 23);
+		contentPane.add(btnPegarValoresEm);
+		
+		lblValores = new JLabel("");
+		lblValores.setBounds(24, 160, 389, 85);
+		contentPane.add(lblValores);
 
 		try {
 			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
@@ -69,72 +118,24 @@ public class TelaComponentesComMascaras extends JFrame {
 			formattedTextFieldPlaca.setBounds(95, 22, 105, 20);
 			contentPane.add(formattedTextFieldPlaca);
 
-			JLabel lblPlaca = new JLabel("Placa:");
-			lblPlaca.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblPlaca.setBounds(10, 25, 75, 14);
-			contentPane.add(lblPlaca);
-
-			JLabel lblTelefone = new JLabel("Telefone:");
-			lblTelefone.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblTelefone.setBounds(10, 55, 75, 14);
-			contentPane.add(lblTelefone);
-
 			formattedTextFieldTelefone = new JFormattedTextField(mascaraTelefone);
 			formattedTextFieldTelefone.setBounds(94, 53, 95, 20);
 			contentPane.add(formattedTextFieldTelefone);
 
-			JLabel lblCpf = new JLabel("CPF:");
-			lblCpf.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblCpf.setBounds(199, 25, 61, 14);
-			contentPane.add(lblCpf);
-
-			JLabel lblCnpj = new JLabel("CNPJ:");
-			lblCnpj.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblCnpj.setBounds(199, 56, 61, 14);
-			contentPane.add(lblCnpj);
-
-			JLabel lblCep = new JLabel("CEP:");
-			lblCep.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblCep.setBounds(10, 86, 74, 14);
-			contentPane.add(lblCep);
-
 			formattedTextFieldCep = new JFormattedTextField(mascaraCep);
 			formattedTextFieldCep.setBounds(94, 83, 95, 20);
 			contentPane.add(formattedTextFieldCep);
-
+			
 			formattedTextFieldCpf = new JFormattedTextField(mascaraCpf);
 			formattedTextFieldCpf.setBounds(270, 22, 154, 20);
 			contentPane.add(formattedTextFieldCpf);
-
+			
 			formattedTextFieldCnpj = new JFormattedTextField(mascaraCnpj);
 			formattedTextFieldCnpj.setBounds(270, 53, 154, 20);
 			contentPane.add(formattedTextFieldCnpj);
-
-			JLabel lblValorEmReais = new JLabel("R$:");
-			lblValorEmReais.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblValorEmReais.setBounds(199, 83, 61, 14);
-			contentPane.add(lblValorEmReais);
-
-			JNumberFormatField txtValorEmReais = new JNumberFormatField(2);
-			txtValorEmReais.setBounds(270, 86, 155, 20);
-			contentPane.add(txtValorEmReais);
-			
-			JButton btnPegarValoresEm = new JButton("Pegar valores em String");
-			btnPegarValoresEm.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					String placa =  formattedTextFieldPlaca.getText();
-					lblValores.setText(placa);
-				}
-			});
-			btnPegarValoresEm.setBounds(100, 126, 234, 23);
-			contentPane.add(btnPegarValoresEm);
-			
-			lblValores = new JLabel("");
-			lblValores.setBounds(24, 160, 389, 85);
-			contentPane.add(lblValores);
-
 		} catch (ParseException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
+			System.out.println("Causa da exceção: " + e.getMessage());
 		}
 	}
 }
