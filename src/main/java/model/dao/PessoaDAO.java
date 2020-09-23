@@ -5,11 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
-import model.vo.Cliente;
-import model.vo.Endereco;
 import model.vo.Pessoa;
 
 public class PessoaDAO implements BaseDAO<Pessoa> {
@@ -32,7 +30,7 @@ public class PessoaDAO implements BaseDAO<Pessoa> {
 			//Conversão de LocalDate (da entidade Pessoa) para sql.Date (para salvar no banco)
 			Date dataNascimentoConvertidaParaSQL = java.sql.Date.valueOf(pessoa.getDataNascimento());
 			query.setDate(5, dataNascimentoConvertidaParaSQL);
-			
+						
 			int codigoRetorno = query.executeUpdate();
 			if(codigoRetorno == Banco.CODIGO_RETORNO_SUCESSO) {
 				ResultSet resultado = query.getGeneratedKeys();
@@ -101,7 +99,8 @@ public class PessoaDAO implements BaseDAO<Pessoa> {
 		
 		//Converte a data oriunda do banco para LocalDate e preenche no VO
 		Date dataSQL = conjuntoResultante.getDate("data_nascimento");
-		pessoa.setDataNascimento(dataSQL.toLocalDate());
+		LocalDate dataNascimento = dataSQL.toLocalDate();
+		pessoa.setDataNascimento(dataNascimento);
 		
 		return pessoa;
 	}

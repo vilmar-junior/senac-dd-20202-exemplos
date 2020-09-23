@@ -1,5 +1,6 @@
 package view.exemplos;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.text.ParseException;
 
@@ -16,6 +17,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JTextArea;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * 
@@ -30,8 +34,12 @@ public class TelaComponentesComMascaras extends JFrame {
 	private JFormattedTextField formattedTextFieldCep;
 	private JFormattedTextField formattedTextFieldTelefone;
 	private JFormattedTextField formattedTextFieldPlaca;
-	private JLabel lblValores;
 	private JButton btnPegarValoresEm;
+	private JTextArea txtAreaValoresDigitados;
+	private JLabel lblQuantidadeCaracteresRestantes;
+	private static int TAMANHO_MAXIMO_DESCRICAO = 50;
+	private JLabel lblExemploTextArea;
+	private JTextArea textAreaValoresCamposComMascara;
 
 	/**
 	 * Launch the application.
@@ -55,7 +63,7 @@ public class TelaComponentesComMascaras extends JFrame {
 	public TelaComponentesComMascaras() {
 		setTitle("Exemplos de Máscaras");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 295);
+		setBounds(100, 100, 450, 499);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -99,16 +107,17 @@ public class TelaComponentesComMascaras extends JFrame {
 		btnPegarValoresEm.setIcon(new ImageIcon(TelaComponentesComMascaras.class.getResource("/icons/icons8-confiança.png")));
 		btnPegarValoresEm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String placa =  formattedTextFieldPlaca.getText();
-				lblValores.setText(placa);
+				String textoCompleto = "Placa (sem máscara): " + formattedTextFieldPlaca.getText().replace("-","") + "\n";
+				textoCompleto += "CPF: " + formattedTextFieldCpf.getText() + "\n";
+				textoCompleto += "CNPJ: " + formattedTextFieldCnpj.getText() + "\n";
+				textoCompleto += "Telefone: " + formattedTextFieldTelefone.getText() + "\n";
+				textoCompleto += "CEP: " + formattedTextFieldCep.getText() + "\n";
+				
+				textAreaValoresCamposComMascara.setText(textoCompleto);
 			}
 		});
 		btnPegarValoresEm.setBounds(100, 126, 240, 50);
 		contentPane.add(btnPegarValoresEm);
-		
-		lblValores = new JLabel("");
-		lblValores.setBounds(24, 160, 389, 85);
-		contentPane.add(lblValores);
 
 		try {
 			MaskFormatter mascaraCpf = new MaskFormatter("###.###.###-##");
@@ -136,6 +145,45 @@ public class TelaComponentesComMascaras extends JFrame {
 			formattedTextFieldCnpj = new JFormattedTextField(mascaraCnpj);
 			formattedTextFieldCnpj.setBounds(270, 53, 154, 20);
 			contentPane.add(formattedTextFieldCnpj);
+			
+			txtAreaValoresDigitados = new JTextArea();
+			txtAreaValoresDigitados.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyReleased(KeyEvent e) {
+					int quantidadeDigitada = txtAreaValoresDigitados.getText().length();
+					int quantidadeAindaDisponivel = TAMANHO_MAXIMO_DESCRICAO - quantidadeDigitada;
+					
+					if(quantidadeAindaDisponivel <= 0) {
+						String textoDigitado = txtAreaValoresDigitados.getText().substring(0,TAMANHO_MAXIMO_DESCRICAO);
+						txtAreaValoresDigitados.setText(textoDigitado);
+						lblQuantidadeCaracteresRestantes.setForeground(Color.RED);
+						quantidadeAindaDisponivel = 0;
+					}else {
+						lblQuantidadeCaracteresRestantes.setForeground(Color.GREEN);
+					}
+					
+					lblQuantidadeCaracteresRestantes.setText(quantidadeAindaDisponivel + "");
+				}
+			});
+			txtAreaValoresDigitados.setBounds(35, 334, 390, 94);
+			contentPane.add(txtAreaValoresDigitados);
+			
+			JLabel lblCaracteresRestantes = new JLabel("Caracteres restantes: ");
+			lblCaracteresRestantes.setBounds(35, 440, 146, 16);
+			contentPane.add(lblCaracteresRestantes);
+			
+			lblQuantidadeCaracteresRestantes = new JLabel(TAMANHO_MAXIMO_DESCRICAO + "");
+			lblQuantidadeCaracteresRestantes.setBounds(181, 440, 61, 16);
+			contentPane.add(lblQuantidadeCaracteresRestantes);
+			
+			lblExemploTextArea = new JLabel("Exemplo de JTextArea");
+			lblExemploTextArea.setBounds(38, 306, 143, 16);
+			contentPane.add(lblExemploTextArea);
+			
+			textAreaValoresCamposComMascara = new JTextArea();
+			textAreaValoresCamposComMascara.setEnabled(false);
+			textAreaValoresCamposComMascara.setBounds(35, 182, 390, 118);
+			contentPane.add(textAreaValoresCamposComMascara);
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro no sistema, entre em contato com o administrador.");
 			System.out.println("Causa da exceção: " + e.getMessage());
