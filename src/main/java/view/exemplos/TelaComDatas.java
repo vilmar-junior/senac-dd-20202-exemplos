@@ -58,7 +58,8 @@ public class TelaComDatas {
 		dateSettings.setAllowKeyboardEditing(false);
 
 		final DateTimePicker dataTeste = new DateTimePicker(dateSettings, null);
-		dataTeste.setBounds(80, 60, 540, 30);
+		
+		dataTeste.setBounds(80, 60, 540, 45);
 		frame.getContentPane().add(dataTeste);
 
 		JButton btnPegarData = new JButton("Criar data");
