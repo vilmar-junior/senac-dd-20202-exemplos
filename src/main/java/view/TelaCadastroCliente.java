@@ -108,7 +108,8 @@ public class TelaCadastroCliente extends JFrame {
 		lblEndereco.setBounds(11, 123, 61, 16);
 		contentPane.add(lblEndereco);
 		
-		ArrayList<Endereco> enderecos = obterEnderecosMock();
+		//TODO chamar controller para buscar do banco
+		ArrayList<Endereco> enderecos = obterEnderecosMock(); 
 		cbEndereco = new JComboBox(enderecos.toArray());
 		cbEndereco.setBounds(84, 119, 370, 27);
 		contentPane.add(cbEndereco);
