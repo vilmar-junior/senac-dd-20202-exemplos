@@ -27,7 +27,7 @@ import model.seletor.ProdutoSeletor;
 import model.vo.Produto;
 
 
-public class TelaListagemProdutos extends JFrame {
+public class TelaListagemComSeletorProdutos extends JFrame {
 
 	private static final String COR_AZUL = "Azul";
 	private static final String COR_AMARELO = "Amarelo";
@@ -52,7 +52,7 @@ public class TelaListagemProdutos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaListagemProdutos frame = new TelaListagemProdutos();
+					TelaListagemComSeletorProdutos frame = new TelaListagemComSeletorProdutos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,7 +66,7 @@ public class TelaListagemProdutos extends JFrame {
 	 * 
 	 * @param cbCor
 	 */
-	public TelaListagemProdutos() {
+	public TelaListagemComSeletorProdutos() {
 		setTitle("Consulta de Produtos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 530);
@@ -80,8 +80,8 @@ public class TelaListagemProdutos extends JFrame {
 		btnConsultar.setBounds(90, 210, 150, 40);
 		contentPane.add(btnConsultar);
 
-		String[] cores = { "---Selecione---", TelaListagemProdutos.COR_AZUL, TelaListagemProdutos.COR_AMARELO,
-				TelaListagemProdutos.COR_PRETO, TelaListagemProdutos.COR_VERDE, TelaListagemProdutos.COR_VERMELHO };
+		String[] cores = { "---Selecione---", TelaListagemComSeletorProdutos.COR_AZUL, TelaListagemComSeletorProdutos.COR_AMARELO,
+				TelaListagemComSeletorProdutos.COR_PRETO, TelaListagemComSeletorProdutos.COR_VERDE, TelaListagemComSeletorProdutos.COR_VERMELHO };
 
 		JLabel lblFiltroNome = new JLabel("Nome:");
 		lblFiltroNome.setBounds(10, 40, 50, 15);

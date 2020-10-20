@@ -6,6 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import view.PainelCadastroCliente;
+import view.PainelCadastroClienteMigLayout;
+
 import javax.swing.JMenuBar;
 import java.awt.Color;
 import javax.swing.JMenu;
@@ -57,7 +61,9 @@ public class TelaMenuPrincipalExemplo extends JFrame {
 		JMenuItem menuItemCadastroCliente = new JMenuItem("Cadastrar");
 		menuItemCadastroCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Cadastrar cliente");
+				PainelCadastroClienteMigLayout painelCliente = new PainelCadastroClienteMigLayout();
+				setContentPane(painelCliente);
+				revalidate();
 			}
 		});
 		menuItemCadastroCliente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));

@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -49,8 +48,6 @@ public class TelaPrincipalComDesktopPane extends JFrame {
 	}
 
 	public TelaPrincipalComDesktopPane() {
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(TelaPrincipalComDesktopPane.class.getResource("/icones/icons8-сharlie-сhaplin.png")));
 		setTitle("Tela Principal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -59,7 +56,6 @@ public class TelaPrincipalComDesktopPane extends JFrame {
 		setJMenuBar(mbPrincipal);
 
 		JMenu mnProdutos = new JMenu("Produtos");
-		mnProdutos.setIcon(new ImageIcon(TelaPrincipalComDesktopPane.class.getResource("/icones/icons8-comprar.png")));
 		mbPrincipal.add(mnProdutos);
 
 		JMenuItem mntmCadastrarProduto = new JMenuItem("Cadastrar");
@@ -94,23 +90,32 @@ public class TelaPrincipalComDesktopPane extends JFrame {
 			}
 		});
 		mntmCadastrarProduto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
-		mntmCadastrarProduto.setIcon(new ImageIcon(
-				TelaPrincipalComDesktopPane.class.getResource("/icones/icons8-adicionar-usuário-masculino.png")));
 		mnProdutos.add(mntmCadastrarProduto);
 
 		JMenuItem mntmListar = new JMenuItem("Listar");
 		mntmListar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
-		mntmListar.setIcon(new ImageIcon(TelaPrincipalComDesktopPane.class.getResource("/icones/icons8-cardápio.png")));
 		mnProdutos.add(mntmListar);
 
 		JMenu mnClientes = new JMenu("Clientes");
-		mnClientes.setIcon(new ImageIcon(TelaPrincipalComDesktopPane.class.getResource("/icones/icons8-usuário.png")));
 		mbPrincipal.add(mnClientes);
 
 		JMenuItem mntmCadastrarCliente = new JMenuItem("Cadastrar");
-		mntmCadastrarCliente.setIcon(new ImageIcon(
-				TelaPrincipalComDesktopPane.class.getResource("/icones/icons8-adicionar-usuário-masculino.png")));
 		mnClientes.add(mntmCadastrarCliente);
+
+		JMenu mnNewMenu = new JMenu("Sobre");
+		mbPrincipal.add(mnNewMenu);
+
+		JMenuItem mntmNewMenuItem = new JMenuItem("Sobre o sistema");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaSobre janelaSobre = new TelaSobre();
+				janelaSobre.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+
+		JMenuBar menuBar = new JMenuBar();
+		mbPrincipal.add(menuBar);
 
 		desktopPane = new JDesktopPane();
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
