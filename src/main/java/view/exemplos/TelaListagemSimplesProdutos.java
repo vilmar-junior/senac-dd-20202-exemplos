@@ -70,6 +70,7 @@ public class TelaListagemSimplesProdutos extends JFrame {
 		contentPane.add(separator);
 
 		tblProdutos = new JTable();
+		tblProdutos.setRowSelectionAllowed(false);
 		this.limparTabela();
 		tblProdutos.setBounds(10, 104, 462, 398);
 		contentPane.add(tblProdutos);

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.seletor.ProdutoSeletor;
@@ -145,7 +144,6 @@ public class ProdutoDAO {
 		}
 
 		if (seletor.temPaginacao()) {
-			// TODO continuar...
 			sql += " LIMIT " + seletor.getLimite() + " OFFSET " + seletor.getOffset();
 		}
 		Connection conexao = Banco.getConnection();
@@ -160,7 +158,7 @@ public class ProdutoDAO {
 				produtos.add(p);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Erro ao consultar produtos com filtros.\nCausa: " + e.getMessage());
 		}
 		return produtos;
 
@@ -268,7 +266,7 @@ public class ProdutoDAO {
 				produtos.add(p);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Erro ao consultar todos os produtos.\nCausa: " + e.getMessage());
 		}
 		return produtos;
 	}
