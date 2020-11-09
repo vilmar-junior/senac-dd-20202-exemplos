@@ -4,6 +4,7 @@ import java.util.List;
 
 import model.bo.ProdutoBO;
 import model.seletor.ProdutoSeletor;
+import model.util.GeradorPlanilha;
 import model.vo.Produto;
 
 public class ProdutoController {
@@ -72,8 +73,8 @@ public class ProdutoController {
 		return bo.listarProdutos(seletor);
 	}
 
-//	public String gerarPlanilha(List<Produto> produtosConsultados, String caminho) {
-//		//GeradorPlanilha geradorExcel = new GeradorPlanilha();
-//		//return geradorExcel.gerarPlanilhaProdutos(caminho, produtosConsultados);
-//	}
+	public String gerarPlanilha(List<Produto> produtosConsultados, String caminho) {
+		GeradorPlanilha geradorExcel = new GeradorPlanilha();
+		return geradorExcel.gerarPlanilhaProdutos(caminho, produtosConsultados);
+	}
 }

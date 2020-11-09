@@ -26,7 +26,6 @@ import controller.ProdutoController;
 import model.seletor.ProdutoSeletor;
 import model.vo.Produto;
 
-
 public class TelaListagemComSeletorProdutos extends JFrame {
 
 	private static final String COR_AZUL = "Azul";
@@ -80,8 +79,9 @@ public class TelaListagemComSeletorProdutos extends JFrame {
 		btnConsultar.setBounds(90, 210, 150, 40);
 		contentPane.add(btnConsultar);
 
-		String[] cores = { "---Selecione---", TelaListagemComSeletorProdutos.COR_AZUL, TelaListagemComSeletorProdutos.COR_AMARELO,
-				TelaListagemComSeletorProdutos.COR_PRETO, TelaListagemComSeletorProdutos.COR_VERDE, TelaListagemComSeletorProdutos.COR_VERMELHO };
+		String[] cores = { "---Selecione---", TelaListagemComSeletorProdutos.COR_AZUL,
+				TelaListagemComSeletorProdutos.COR_AMARELO, TelaListagemComSeletorProdutos.COR_PRETO,
+				TelaListagemComSeletorProdutos.COR_VERDE, TelaListagemComSeletorProdutos.COR_VERMELHO };
 
 		JLabel lblFiltroNome = new JLabel("Nome:");
 		lblFiltroNome.setBounds(10, 40, 50, 15);
@@ -121,9 +121,9 @@ public class TelaListagemComSeletorProdutos extends JFrame {
 					String caminho = janelaArquivos.getSelectedFile().getAbsolutePath();
 
 					ProdutoController controller = new ProdutoController();
-					//String mensagem = controller.gerarPlanilha(produtosConsultados, caminho);
+					String mensagem = controller.gerarPlanilha(produtosConsultados, caminho);
 
-					//JOptionPane.showMessageDialog(null, mensagem);
+					JOptionPane.showMessageDialog(null, mensagem);
 				}
 			}
 		});
@@ -225,7 +225,7 @@ public class TelaListagemComSeletorProdutos extends JFrame {
 		seletor.setDataInicioCadastro(dtInicioCadastro.getDate());
 		seletor.setDataFimCadastro(dtFimCadastro.getDate());
 
-		//AQUI é feita a consulta dos produtos e atualização na tabela
+		// AQUI é feita a consulta dos produtos e atualização na tabela
 		List<Produto> produtos = controlador.listarProdutos(seletor);
 		atualizarTabelaProdutos(produtos);
 
@@ -246,13 +246,8 @@ public class TelaListagemComSeletorProdutos extends JFrame {
 			// na ORDEM do cabeçalho da tabela
 			String dataFormatada = produto.getDataCadastro().format(formatter);
 
-			String[] novaLinha = new String[] { 
-					produto.getId() + "", 
-					produto.getNome(), 
-					produto.getFabricante(),
-					produto.getPeso() + "", 
-					dataFormatada 
-			};
+			String[] novaLinha = new String[] { produto.getId() + "", produto.getNome(), produto.getFabricante(),
+					produto.getPeso() + "", dataFormatada };
 			modelo.addRow(novaLinha);
 		}
 
